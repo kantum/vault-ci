@@ -4,12 +4,13 @@ stages:
   - test1
 
 variables:
-  CONFIG: $CONFIG
-
-
+  CONFIG: "test"
 secrets:
   stage: secrets
   image: vault
+  secrets:
+    TEST:
+          vault: myproject/staging/db/password@secret
   script:
     - echo $CI_COMMIT_REF_NAME
     - echo $CI_COMMIT_REF_PROTECTED
@@ -17,17 +18,29 @@ secrets:
     - then echo works
     - fi
     - export VAULT_TOKEN="$(vault write -field=token auth/jwt/login role=jobpass-development jwt=$CI_JOB_JWT)"
-    - export CONFIG="$(vault kv get -field=data -format=yaml jobpass/ops/development/back/config)"
-    - echo "$CONFIG" 
+    - CONFIG="$(vault kv get -field=data -format=yaml jobpass/ops/development/back/config)"
+    - echo "$CONFIG" > test
+    - cat test
+    - echo "${CONFIG}" > test
+    - cat test
+    - echo $TEST
+
 
 test:
   stage: test
   script:
-    - echo "$CONFIG"
+    - echo "$CONFIG" > test
+    - cat test
+    - echo "${CONFIG}" > test
+    - cat test
+
 
 test1:
   stage: test1
   script:
-    - echo "$CONFIG"
+    - echo "$CONFIG" > test
+    - cat test
+    - echo "${CONFIG}" > test
+    - cat test
 
 
