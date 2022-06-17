@@ -1,6 +1,8 @@
 stages:       
   - secrets
   - test
+  - test1
+  - test2
 
 secrets:
   stage: secrets
@@ -12,8 +14,6 @@ secrets:
     - then echo works
     - fi
     - export VAULT_TOKEN="$(vault write -field=token auth/jwt/login role=jobpass-development jwt=$CI_JOB_JWT)"
-    - export FIREBASE="$(vault kv get -format=json -field=firebase jobpass/ops/development/back/config)"
-    - echo $FIREBASE
     - export CONFIG="$(vault kv get -field=data -format=yaml jobpass/ops/development/back/config)"
     - echo "$CONFIG" > test
     - cat test
@@ -21,9 +21,21 @@ secrets:
     - cat test
 
 
-# test:
-#   stage: test
-#   script:
-#     - echo $CONFIG
+test:
+  stage: test
+  script:
+    - echo "$CONFIG" > test
+    - cat test
+    - echo "${CONFIG}" > test
+    - cat test
 
-#     - echo "$CONFIG"
+
+test1:
+  stage: test
+  script:
+    - echo "$CONFIG" > test
+    - cat test
+    - echo "${CONFIG}" > test
+    - cat test
+
+
