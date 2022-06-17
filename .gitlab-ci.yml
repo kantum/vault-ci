@@ -20,6 +20,7 @@ stages:
   - deploy
 
 read_secrets:
+  image: vault
   script:
     # Check job's ref name
     - echo $CI_COMMIT_REF_NAME
