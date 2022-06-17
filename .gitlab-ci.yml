@@ -7,6 +7,9 @@ secrets:
   script:
     - echo $CI_COMMIT_REF_NAME
     - echo $CI_COMMIT_REF_PROTECTED
+    - if $CI_COMMIT_REF_NAME == "master"
+    - then echo works
+    - fi
     - export VAULT_TOKEN="$(vault write -field=token auth/jwt/login role=jobpass-development jwt=$CI_JOB_JWT)"
     - export FIREBASE="$(vault kv get -format=json -field=firebase jobpass/ops/development/back/config)"
     - echo $FIREBASE
