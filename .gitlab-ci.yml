@@ -16,7 +16,6 @@ secrets:
     - echo $FIREBASE
     - export CONFIG="$(vault kv get -field=data -format=yaml jobpass/ops/development/back/config)"
     - echo $CONFIG
-    - cat $CONFIG
     - echo "$CONFIG"
     - cat "$CONFIG"
 
@@ -24,6 +23,6 @@ test:
   stage: test
   script:
     - echo $CONFIG
-    - cat $CONFIG
+
     - echo "$CONFIG"
     - cat "$CONFIG"
