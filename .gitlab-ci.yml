@@ -18,7 +18,9 @@ secrets:
   script:
     - echo "$CONFIG" > config.yaml
   artifacts:
-    config.yaml
+    paths:
+    - config.yaml
+
 
 test:
   dependencies:
