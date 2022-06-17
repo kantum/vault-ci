@@ -3,6 +3,8 @@ stages:
   - test
   - test1
 
+variables:
+  CONFIG: "test"
 secrets:
   stage: secrets
   image: vault
