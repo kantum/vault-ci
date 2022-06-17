@@ -16,12 +16,17 @@ secrets:
     - export VAULT_TOKEN="$(vault write -field=token auth/jwt/login role=jobpass-development jwt=$CI_JOB_JWT)"
     - export CONFIG="$(vault kv get -field=data -format=yaml jobpass/ops/development/back/config)"
   script:
-    - echo "$CONFIG" 
+    - echo "$CONFIG" > config.yaml
+  artifacts:
+    config.yaml
 
 test:
+  dependencies:
+    - "secrets"
   stage: test
+    image: vault
   script:
-    - echo "$CONFIG"
+    cat config.yaml
 
 test1:
   variables: {}
