@@ -4,7 +4,9 @@ stages:
   - test1
 
 variables:
-  CONFIG: "test"
+  CONFIG: $CONFIG
+
+
 secrets:
   stage: secrets
   image: vault
@@ -15,28 +17,17 @@ secrets:
     - then echo works
     - fi
     - export VAULT_TOKEN="$(vault write -field=token auth/jwt/login role=jobpass-development jwt=$CI_JOB_JWT)"
-    - CONFIG="$(vault kv get -field=data -format=yaml jobpass/ops/development/back/config)"
-    - echo "$CONFIG" > test
-    - cat test
-    - echo "${CONFIG}" > test
-    - cat test
-
+    - export CONFIG="$(vault kv get -field=data -format=yaml jobpass/ops/development/back/config)"
+    - echo "$CONFIG" 
 
 test:
   stage: test
   script:
-    - echo "$CONFIG" > test
-    - cat test
-    - echo "${CONFIG}" > test
-    - cat test
-
+    - echo "$CONFIG"
 
 test1:
   stage: test1
   script:
-    - echo "$CONFIG" > test
-    - cat test
-    - echo "${CONFIG}" > test
-    - cat test
+    - echo "$CONFIG"
 
 
