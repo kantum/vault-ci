@@ -34,7 +34,7 @@ read_secrets:
     # Now use the VAULT_TOKEN to read the secret and store it in an environment variable
     - export NAME="$(vault kv get -field=name jobpass/ops/development/back/config)"
     # Use the secret
-    - echo $PASSWORD
+    - echo $NAME
     # # This will fail because the role myproject-staging can not read secrets from secret/myproject/production/*
     # - export PASSWORD="$(vault kv get -field=password secret/myproject/production/db)"
 
