@@ -17,6 +17,8 @@ secrets:
     - export CONFIG="$(vault kv get -field=data -format=yaml jobpass/ops/development/back/config)"
     - echo "$CONFIG" > test
     - cat test
+    - echo "${CONFIG}" > test
+    - cat test
 
 
 # test:
