@@ -14,10 +14,16 @@ secrets:
     - export VAULT_TOKEN="$(vault write -field=token auth/jwt/login role=jobpass-development jwt=$CI_JOB_JWT)"
     - export FIREBASE="$(vault kv get -format=json -field=firebase jobpass/ops/development/back/config)"
     - echo $FIREBASE
-    - export CONFIG="$(vault kv get -format=yaml jobpass/ops/development/back/config)"
+    - export CONFIG="$(vault kv get -field=data -format=yaml jobpass/ops/development/back/config)"
     - echo $CONFIG
+    - cat $CONFIG
+    - echo "$CONFIG"
+    - cat "$CONFIG"
 
 test:
   stage: test
   script:
     - echo $CONFIG
+    - cat $CONFIG
+    - echo "$CONFIG"
+    - cat "$CONFIG"
