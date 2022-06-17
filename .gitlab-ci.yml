@@ -24,9 +24,8 @@ test:
   dependencies:
     - "secrets"
   stage: test
-    image: vault
   script:
-    cat config.yaml
+    - cat config.yaml
 
 test1:
   variables: {}
