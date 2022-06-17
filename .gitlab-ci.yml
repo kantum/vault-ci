@@ -1,5 +1,6 @@
 stages:       
   - secrets
+  - test
 
 secrets:
   stage: secrets
@@ -14,4 +15,9 @@ secrets:
     - export FIREBASE="$(vault kv get -format=json -field=firebase jobpass/ops/development/back/config)"
     - echo $FIREBASE
     - export CONFIG="$(vault kv get -format=yaml jobpass/ops/development/back/config)"
+    - echo $CONFIG
+
+test:
+  stage: test
+  script:
     - echo $CONFIG
