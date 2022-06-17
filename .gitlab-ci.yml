@@ -1,6 +1,7 @@
 stages:       
   - secrets
   - test
+  - test1
 
 secrets:
   stage: secrets
@@ -11,8 +12,8 @@ secrets:
     - if [[  "$CI_COMMIT_REF_NAME" == "master" ]]
     - then echo works
     - fi
-    - export VAULT_TOKEN="$(vault write -field=token auth/jwt/login role=jobpass-development jwt=$CI_JOB_JWT)"
-    - export CONFIG="$(vault kv get -field=data -format=yaml jobpass/ops/development/back/config)"
+    - $VAULT_TOKEN="$(vault write -field=token auth/jwt/login role=jobpass-development jwt=$CI_JOB_JWT)"
+    - $CONFIG="$(vault kv get -field=data -format=yaml jobpass/ops/development/back/config)"
     - echo "$CONFIG" > test
     - cat test
     - echo "${CONFIG}" > test
