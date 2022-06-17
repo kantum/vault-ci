@@ -15,15 +15,13 @@ secrets:
     - export FIREBASE="$(vault kv get -format=json -field=firebase jobpass/ops/development/back/config)"
     - echo $FIREBASE
     - export CONFIG="$(vault kv get -field=data -format=yaml jobpass/ops/development/back/config)"
-    - echo -e $CONFIG > test
+    - echo "$CONFIG" > test
     - cat test
-    - echo "$CONFIG"
-    - cat "$CONFIG"
 
-test:
-  stage: test
-  script:
-    - echo $CONFIG
 
-    - echo "$CONFIG"
-    - cat "$CONFIG"
+# test:
+#   stage: test
+#   script:
+#     - echo $CONFIG
+
+#     - echo "$CONFIG"
