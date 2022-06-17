@@ -7,7 +7,6 @@ secrets:
   script:
     - echo $CI_COMMIT_REF_NAME
     - echo $CI_COMMIT_REF_PROTECTED
-    - export VAULT_ADDR=https://vault.jobpass.io
     - export VAULT_TOKEN="$(vault write -field=token auth/jwt/login role=jobpass-development jwt=$CI_JOB_JWT)"
     - export NAME="$(vault kv get -field=name jobpass/ops/development/back/config)"
     - echo $NAME
